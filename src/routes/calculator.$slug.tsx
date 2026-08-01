@@ -63,7 +63,7 @@ function CalculatorPage() {
         ? [
             {
               "@type": "FAQPage",
-              mainEntity: calc.faqs.map((faq) => ({
+              mainEntity: calc.faqs.map((faq: { q: string; a: string }) => ({
                 "@type": "Question",
                 name: faq.q,
                 acceptedAnswer: { "@type": "Answer", text: faq.a },
