@@ -27,46 +27,9 @@ export const Route = createFileRoute("/calculator/$slug")({
         { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: `/calculator/${calc.slug}` }],
-      scripts: [
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "SoftwareApplication",
-                name: calc.name,
-                applicationCategory: "UtilitiesApplication",
-                operatingSystem: "Any",
-                description: calc.description,
-                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              },
-              {
-                "@type": "BreadcrumbList",
-                itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-                  { "@type": "ListItem", position: 2, name: "Calculators", item: "/calculators" },
-                  { "@type": "ListItem", position: 3, name: calc.name, item: `/calculator/${calc.slug}` },
-                ],
-              },
-              ...(calc.faqs?.length
-                ? [
-                    {
-                      "@type": "FAQPage",
-                      mainEntity: calc.faqs.map((faq) => ({
-                        "@type": "Question",
-                        name: faq.q,
-                        acceptedAnswer: { "@type": "Answer", text: faq.a },
-                      })),
-                    },
-                  ]
-                : []),
-            ],
-          }),
-        },
-      ],
     };
   },
+
   component: CalculatorPage,
 });
 
