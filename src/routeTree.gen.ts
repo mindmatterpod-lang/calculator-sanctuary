@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalculatorsRouteImport } from './routes/calculators'
 import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as CalculatorSlugRouteImport } from './routes/calculator.$slug'
@@ -30,6 +31,11 @@ const CalculatorsRoute = CalculatorsRouteImport.update({
 const CategoriesRoute = CategoriesRouteImport.update({
   id: '/categories',
   path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calculators': typeof CalculatorsRoute
   '/categories': typeof CategoriesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/calculator/$slug': typeof CalculatorSlugRoute
   '/category/$slug': typeof CategorySlugRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calculators': typeof CalculatorsRoute
   '/categories': typeof CategoriesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/calculator/$slug': typeof CalculatorSlugRoute
   '/category/$slug': typeof CategorySlugRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/calculators': typeof CalculatorsRoute
   '/categories': typeof CategoriesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/calculator/$slug': typeof CalculatorSlugRoute
   '/category/$slug': typeof CategorySlugRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calculators'
     | '/categories'
+    | '/sitemap.xml'
     | '/blog/$slug'
     | '/calculator/$slug'
     | '/category/$slug'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calculators'
     | '/categories'
+    | '/sitemap.xml'
     | '/blog/$slug'
     | '/calculator/$slug'
     | '/category/$slug'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calculators'
     | '/categories'
+    | '/sitemap.xml'
     | '/blog/$slug'
     | '/calculator/$slug'
     | '/category/$slug'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalculatorsRoute: typeof CalculatorsRoute
   CategoriesRoute: typeof CategoriesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   BlogSlugRoute: typeof BlogSlugRoute
   CalculatorSlugRoute: typeof CalculatorSlugRoute
   CategorySlugRoute: typeof CategorySlugRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/categories'
       fullPath: '/categories'
       preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalculatorsRoute: CalculatorsRoute,
   CategoriesRoute: CategoriesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   BlogSlugRoute: BlogSlugRoute,
   CalculatorSlugRoute: CalculatorSlugRoute,
   CategorySlugRoute: CategorySlugRoute,
