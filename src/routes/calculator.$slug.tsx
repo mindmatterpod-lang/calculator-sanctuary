@@ -40,10 +40,45 @@ function CalculatorPage() {
     .filter((c) => c.slug !== calc.slug)
     .slice(0, 3);
   const article = posts.find((p) => p.related === calc.slug);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        name: calc.name,
+        applicationCategory: "UtilitiesApplication",
+        operatingSystem: "Any",
+        description: calc.description,
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+          { "@type": "ListItem", position: 2, name: "Calculators", item: "/calculators" },
+          { "@type": "ListItem", position: 3, name: calc.name, item: `/calculator/${calc.slug}` },
+        ],
+      },
+      ...(calc.faqs?.length
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: calc.faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.q,
+                acceptedAnswer: { "@type": "Answer", text: faq.a },
+              })),
+            },
+          ]
+        : []),
+    ],
+  };
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+
         <Link to="/" className="hover:text-foreground">
           Home
         </Link>
