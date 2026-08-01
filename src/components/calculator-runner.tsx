@@ -186,23 +186,26 @@ export function CalculatorRunner({ calc }: { calc: Calculator }) {
           <div className="surface-card p-5">
             <h3 className="font-display text-base font-semibold">Visual breakdown</h3>
             <div className="mt-4 h-56">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={output.chart}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
-                  <XAxis dataKey="name" stroke="var(--muted-foreground)" fontSize={11} tickLine={false} />
-                  <YAxis stroke="var(--muted-foreground)" fontSize={11} tickLine={false} width={54} />
-                  <ChartTooltip
-                    contentStyle={{
-                      background: "var(--card)",
-                      border: "1px solid var(--border)",
-                      borderRadius: 12,
-                      color: "var(--foreground)",
-                    }}
-                  />
-                  <Bar dataKey="value" fill="var(--brand)" radius={[8, 8, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+              <ClientOnly fallback={null}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={output.chart}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                    <XAxis dataKey="name" stroke="var(--muted-foreground)" fontSize={11} tickLine={false} />
+                    <YAxis stroke="var(--muted-foreground)" fontSize={11} tickLine={false} width={54} />
+                    <ChartTooltip
+                      contentStyle={{
+                        background: "var(--card)",
+                        border: "1px solid var(--border)",
+                        borderRadius: 12,
+                        color: "var(--foreground)",
+                      }}
+                    />
+                    <Bar dataKey="value" fill="var(--brand)" radius={[8, 8, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </ClientOnly>
             </div>
+
           </div>
         ) : null}
 
