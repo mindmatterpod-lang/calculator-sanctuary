@@ -1,4 +1,6 @@
+import { ClientOnly } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+
 import { Copy, Download, Heart, Share2 } from "lucide-react";
 import {
   Bar,
