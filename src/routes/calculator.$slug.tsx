@@ -105,7 +105,7 @@ function CalculatorPage() {
         <section className="mt-14">
           <h2 className="font-display text-2xl font-bold">Frequently asked questions</h2>
           <div className="mt-5 space-y-3">
-            {calc.faqs.map((faq) => (
+            {calc.faqs.map((faq: { q: string; a: string }) => (
               <div key={faq.q} className="surface-card p-5">
                 <h3 className="font-display text-base font-semibold">{faq.q}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{faq.a}</p>

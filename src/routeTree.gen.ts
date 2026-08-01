@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalculatorsRouteImport } from './routes/calculators'
 import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as CalculatorSlugRouteImport } from './routes/calculator.$slug'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const CategoriesRoute = CategoriesRouteImport.update({
   path: '/categories',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalculatorSlugRoute = CalculatorSlugRouteImport.update({
+  id: '/calculator/$slug',
+  path: '/calculator/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CategorySlugRoute = CategorySlugRouteImport.update({
   id: '/category/$slug',
   path: '/category/$slug',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calculators': typeof CalculatorsRoute
   '/categories': typeof CategoriesRoute
+  '/calculator/$slug': typeof CalculatorSlugRoute
   '/category/$slug': typeof CategorySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calculators': typeof CalculatorsRoute
   '/categories': typeof CategoriesRoute
+  '/calculator/$slug': typeof CalculatorSlugRoute
   '/category/$slug': typeof CategorySlugRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,38 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/calculators': typeof CalculatorsRoute
   '/categories': typeof CategoriesRoute
+  '/calculator/$slug': typeof CalculatorSlugRoute
   '/category/$slug': typeof CategorySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calculators' | '/categories' | '/category/$slug'
+  fullPaths:
+    | '/'
+    | '/calculators'
+    | '/categories'
+    | '/calculator/$slug'
+    | '/category/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calculators' | '/categories' | '/category/$slug'
-  id: '__root__' | '/' | '/calculators' | '/categories' | '/category/$slug'
+  to:
+    | '/'
+    | '/calculators'
+    | '/categories'
+    | '/calculator/$slug'
+    | '/category/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/calculators'
+    | '/categories'
+    | '/calculator/$slug'
+    | '/category/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalculatorsRoute: typeof CalculatorsRoute
   CategoriesRoute: typeof CategoriesRoute
+  CalculatorSlugRoute: typeof CalculatorSlugRoute
   CategorySlugRoute: typeof CategorySlugRoute
 }
 
@@ -92,6 +118,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calculator/$slug': {
+      id: '/calculator/$slug'
+      path: '/calculator/$slug'
+      fullPath: '/calculator/$slug'
+      preLoaderRoute: typeof CalculatorSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/category/$slug': {
       id: '/category/$slug'
       path: '/category/$slug'
@@ -106,6 +139,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalculatorsRoute: CalculatorsRoute,
   CategoriesRoute: CategoriesRoute,
+  CalculatorSlugRoute: CalculatorSlugRoute,
   CategorySlugRoute: CategorySlugRoute,
 }
 export const routeTree = rootRouteImport
