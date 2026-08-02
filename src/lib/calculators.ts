@@ -1,3 +1,5 @@
+import { extraCalculators } from "./calculators-extra";
+
 export type FieldType = "number" | "text" | "date" | "select";
 
 export interface Field {
@@ -1713,9 +1715,12 @@ const converterCalcs: Calculator[] = [
   },
 ];
 
-export const calculators: Calculator[] = [...baseCalculators, ...converterCalcs].sort((a, b) =>
-  a.name.localeCompare(b.name),
-);
+export const calculators: Calculator[] = [
+  ...baseCalculators,
+  ...converterCalcs,
+  ...extraCalculators,
+].sort((a, b) => a.name.localeCompare(b.name));
+
 
 export const calculatorsByCategory = (slug: string) =>
   calculators.filter((c) => c.category === slug);
