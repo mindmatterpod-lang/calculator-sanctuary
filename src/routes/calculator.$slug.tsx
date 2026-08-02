@@ -8,13 +8,14 @@ export const Route = createFileRoute("/calculator/$slug")({
   loader: ({ params }) => {
     const calc = getCalculator(params.slug);
     if (!calc) throw notFound();
-    return { calc };
+    // Only serializable data may cross the SSR boundary — compute() is a function.
+    return { slug: calc.slug };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) {
+    const calc = loaderData ? getCalculator(loaderData.slug) : undefined;
+    if (!calc) {
       return { meta: [{ title: "Calculator not found — CalculatorHub" }, { name: "robots", content: "noindex" }] };
     }
-    const { calc } = loaderData;
     const title = `${calc.name} — Free Online Calculator | CalculatorHub`;
     const description = `${calc.description} Instant results, formula breakdown and step-by-step working.`;
     return {
@@ -23,8 +24,11 @@ export const Route = createFileRoute("/calculator/$slug")({
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: `/calculator/${calc.slug}` },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
       ],
       links: [{ rel: "canonical", href: `/calculator/${calc.slug}` }],
     };
@@ -34,8 +38,11 @@ export const Route = createFileRoute("/calculator/$slug")({
 });
 
 function CalculatorPage() {
-  const { calc } = Route.useLoaderData();
+  const { slug } = Route.useLoaderData();
+  const calc = getCalculator(slug);
+  if (!calc) throw notFound();
   const category = getCategory(calc.category);
+
   const related = calculatorsByCategory(calc.category)
     .filter((c) => c.slug !== calc.slug)
     .slice(0, 3);
