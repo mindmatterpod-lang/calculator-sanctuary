@@ -3,7 +3,7 @@ import { calculatorsByCategory, categories } from "@/lib/calculators";
 
 const title = "Calculator Categories — CalculatorHub";
 const description =
-  "Explore CalculatorHub by category: finance, health, education, mathematics, engineering, physics, chemistry, time and date, unit converters, everyday life and programming.";
+  "Browse CalculatorHub by category: finance, health, education, maths, engineering, physics, chemistry, time, units and everyday life.";
 
 export const Route = createFileRoute("/categories")({
   head: () => ({
