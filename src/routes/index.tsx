@@ -13,7 +13,30 @@ import {
 
 const title = "CalculatorHub — Every Calculator You'll Ever Need";
 const description =
-  "Hundreds of fast, accurate, free calculators for finance, health, maths, physics, chemistry, unit conversion and more — beautifully designed and instantly searchable.";
+  "Hundreds of fast, accurate, free calculators for finance, health, maths, physics, chemistry and unit conversion — instantly searchable.";
+
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: "CalculatorHub",
+      url: "/",
+      description,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: "/calculators?q={search_term_string}",
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "Organization",
+      name: "CalculatorHub",
+      url: "/",
+      description: "CalculatorHub builds free, accurate online calculators for finance, health, education and science.",
+    },
+  ],
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,9 +45,11 @@ export const Route = createFileRoute("/")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Home,
 });
