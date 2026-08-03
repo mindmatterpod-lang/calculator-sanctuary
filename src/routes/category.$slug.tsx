@@ -34,8 +34,19 @@ function CategoryPage() {
   const { category } = Route.useLoaderData();
   const calcs = calculatorsByCategory(category.slug);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+      { "@type": "ListItem", position: 2, name: "Categories", item: "/categories" },
+      { "@type": "ListItem", position: 3, name: category.name, item: `/category/${category.slug}` },
+    ],
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
         <Link to="/" className="hover:text-foreground">
           Home
