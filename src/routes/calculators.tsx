@@ -16,8 +16,10 @@ export const Route = createFileRoute("/calculators")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "/calculators" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "/calculators" }],
   }),
   component: AllCalculators,
 });

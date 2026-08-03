@@ -13,8 +13,10 @@ export const Route = createFileRoute("/categories")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "/categories" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "/categories" }],
   }),
   component: CategoriesPage,
 });
