@@ -856,7 +856,7 @@ const baseCalculators: Calculator[] = [
     category: "mathematics",
     popular: true,
     description:
-      "Free online scientific calculator with trigonometric, inverse trig, logarithmic, exponential, power and root functions, in degrees or radians.",
+      "Free online scientific calculator: trig, log, exponential, power and root functions.",
     formula: "result = fn(x) — or x ʏ for power functions",
     fields: [
       sel(
