@@ -33,8 +33,32 @@ function BlogPost() {
   const { post } = Route.useLoaderData();
   const calc = post.related ? getCalculator(post.related) : undefined;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: post.title,
+        description: post.excerpt,
+        articleSection: "Calculator guides",
+        author: { "@type": "Organization", name: "CalculatorHub" },
+        publisher: { "@type": "Organization", name: "CalculatorHub" },
+        mainEntityOfPage: `/blog/${post.slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+          { "@type": "ListItem", position: 2, name: "Blog", item: "/blog" },
+          { "@type": "ListItem", position: 3, name: post.title, item: `/blog/${post.slug}` },
+        ],
+      },
+    ],
+  };
+
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
         <Link to="/" className="hover:text-foreground">
           Home
