@@ -854,23 +854,118 @@ const baseCalculators: Calculator[] = [
     slug: "scientific-calculator",
     name: "Scientific Calculator",
     category: "mathematics",
-    description: "Trigonometric, logarithmic and exponential functions.",
-    fields: [sel("fn", "Function", ["sin", "cos", "tan", "ln", "log10", "√", "e^x", "x²"], "sin"), f("x", "Value", 45)],
+    popular: true,
+    description:
+      "Free online scientific calculator with trigonometric, inverse trig, logarithmic, exponential, power and root functions, in degrees or radians.",
+    formula: "result = fn(x) — or x ʏ for power functions",
+    fields: [
+      sel(
+        "fn",
+        "Function",
+        [
+          "sin",
+          "cos",
+          "tan",
+          "asin",
+          "acos",
+          "atan",
+          "sinh",
+          "cosh",
+          "tanh",
+          "ln",
+          "log10",
+          "log2",
+          "e^x",
+          "10^x",
+          "√x",
+          "∛x",
+          "x²",
+          "x³",
+          "x^y",
+          "y-th root of x",
+          "1/x",
+          "|x|",
+          "x!",
+        ],
+        "sin",
+      ),
+      f("x", "Value (x)", 45),
+      f("y", "Second value (y) — for x^y and roots", 2),
+      sel("unit", "Angle unit", ["degrees", "radians"], "degrees"),
+    ],
     compute: (v) => {
       const x = num(v.x);
-      const rad = (x * Math.PI) / 180;
+      const y = num(v.y, 2);
+      const isDeg = (v.unit ?? "degrees") === "degrees";
+      const toAngle = (n: number) => (isDeg ? (n * Math.PI) / 180 : n);
+      const fromAngle = (n: number) => (isDeg ? (n * 180) / Math.PI : n);
+      const factorial = (n: number) => {
+        if (n < 0 || !Number.isInteger(n) || n > 170) return NaN;
+        let acc = 1;
+        for (let i = 2; i <= n; i += 1) acc *= i;
+        return acc;
+      };
       const map: Record<string, number> = {
-        sin: Math.sin(rad),
-        cos: Math.cos(rad),
-        tan: Math.tan(rad),
+        sin: Math.sin(toAngle(x)),
+        cos: Math.cos(toAngle(x)),
+        tan: Math.tan(toAngle(x)),
+        asin: fromAngle(Math.asin(x)),
+        acos: fromAngle(Math.acos(x)),
+        atan: fromAngle(Math.atan(x)),
+        sinh: Math.sinh(x),
+        cosh: Math.cosh(x),
+        tanh: Math.tanh(x),
         ln: Math.log(x),
         log10: Math.log10(x),
-        "√": Math.sqrt(x),
+        log2: Math.log2(x),
         "e^x": Math.exp(x),
+        "10^x": 10 ** x,
+        "√x": Math.sqrt(x),
+        "∛x": Math.cbrt(x),
         "x²": x * x,
+        "x³": x * x * x,
+        "x^y": x ** y,
+        "y-th root of x": y === 0 ? NaN : Math.sign(x) * Math.abs(x) ** (1 / y),
+        "1/x": x === 0 ? NaN : 1 / x,
+        "|x|": Math.abs(x),
+        "x!": factorial(x),
       };
-      return { result: fmt(map[v.fn], 8), detail: ["sin", "cos", "tan"].includes(v.fn) ? "Angle interpreted in degrees" : undefined };
+      const fn = v.fn ?? "sin";
+      const out = map[fn];
+      const usesAngleIn = ["sin", "cos", "tan"].includes(fn);
+      const usesAngleOut = ["asin", "acos", "atan"].includes(fn);
+      const usesY = ["x^y", "y-th root of x"].includes(fn);
+      const label = usesY ? `${fn.replace("x", String(x)).replace("y", String(y))}` : `${fn}(${x})`;
+      return {
+        result: Number.isFinite(out) ? fmt(out, 8) : "Undefined for this input",
+        detail: usesAngleIn
+          ? `Angle read in ${isDeg ? "degrees" : "radians"}`
+          : usesAngleOut
+            ? `Answer returned in ${isDeg ? "degrees" : "radians"}`
+            : usesY
+              ? "Uses both x and y"
+              : undefined,
+        steps: [`${label} = ${Number.isFinite(out) ? fmt(out, 8) : "undefined"}`],
+      };
     },
+    faqs: [
+      {
+        q: "Is this scientific calculator free to use online?",
+        a: "Yes — this scientific calculator runs entirely in your browser, with no sign-up, downloads or limits on how many calculations you make.",
+      },
+      {
+        q: "Which scientific functions does it support?",
+        a: "Trigonometry (sin, cos, tan and their inverses), hyperbolic functions, natural and base-10/base-2 logarithms, exponentials, powers, square and cube roots, n-th roots, reciprocals, absolute value and factorials.",
+      },
+      {
+        q: "Can I switch between degrees and radians?",
+        a: "Yes. Use the angle unit selector — trigonometric inputs and inverse-trig answers follow whichever unit you pick.",
+      },
+      {
+        q: "How do I calculate x to the power of y?",
+        a: "Choose the x^y function, enter your base in the x field and the exponent in the y field. The same pair of fields drives the y-th root function.",
+      },
+    ],
   },
   {
     slug: "matrix-calculator",
