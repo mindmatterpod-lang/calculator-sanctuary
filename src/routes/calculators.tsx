@@ -6,7 +6,7 @@ import { calculators, categories, searchCalculators } from "@/lib/calculators";
 
 const title = "All Calculators — CalculatorHub";
 const description =
-  "Search and filter every calculator on CalculatorHub: finance, health, education, maths, engineering, physics, chemistry, time, units, everyday life and programming.";
+  "Search every CalculatorHub tool: finance, health, education, maths, physics, chemistry, time, units and more — free and instant.";
 
 export const Route = createFileRoute("/calculators")({
   head: () => ({
