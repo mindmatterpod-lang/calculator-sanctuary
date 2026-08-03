@@ -62,6 +62,7 @@ function Home() {
 
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }} />
       <section className="relative overflow-hidden px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
         <div className="aurora" />
         <FloatingSymbols />
