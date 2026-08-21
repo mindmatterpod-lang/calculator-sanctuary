@@ -30,7 +30,11 @@ export const Route = createFileRoute("/calculator/$slug")({
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
       ],
-      links: [{ rel: "canonical", href: `/calculator/${calc.slug}` }],
+      // Old line 33:
+// links: [{ rel: 'canonical', href: `/calculator/${calc.slug}` }],
+
+// Fixed line 33:
+links: [{ rel: 'canonical', href: `https://calculator-sanctuary.vercel.app/calculator/${calc.slug}` }],
     };
   },
 
@@ -60,11 +64,26 @@ function CalculatorPage() {
       },
       {
         "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-          { "@type": "ListItem", position: 2, name: "Calculators", item: "/calculators" },
-          { "@type": "ListItem", position: 3, name: calc.name, item: `/calculator/${calc.slug}` },
-        ],
+        "itemListElement": [
+  { 
+    "@type": "ListItem", 
+    position: 1, 
+    name: "Home", 
+    item: "https://calculator-sanctuary.vercel.app/" 
+  },
+  { 
+    "@type": "ListItem", 
+    position: 2, 
+    name: "Calculators", 
+    item: "https://calculator-sanctuary.vercel.app/calculators" 
+  },
+  { 
+    "@type": "ListItem", 
+    position: 3, 
+    name: calc.name, 
+    item: `https://calculator-sanctuary.vercel.app/calculator/${calc.slug}` 
+  }
+],
       },
       ...(calc.faqs?.length
         ? [
