@@ -15,9 +15,18 @@ export const posts: Post[] = [
     readTime: "6 min read",
     related: "gear-ratio-calculator",
     body: [
-      "A gear ratio measures the mechanical relationship between two or more meshed gears in a gear train. It defines how input speed and torque transfer from a drive gear to a driven gear. The basic formula is: Gear Ratio = Driven Gear Teeth ÷ Drive Gear Teeth. For example, a 60-tooth driven gear powered by a 20-tooth drive gear yields a 3:1 gear ratio.",
-      "Gear ratios directly alter rotational speed (RPM) and output torque. Calculate output shaft speed using the formula: Output RPM = Input RPM ÷ Gear Ratio. If a motor runs at 3,000 RPM through a 5:1 reduction gear, the output turns at 600 RPM while increasing output torque by a factor of 5.",
-      "For compound gear trains with multiple reduction stages, multiply individual stage ratios together: Total Ratio = Stage 1 × Stage 2. For automotive transmission calculations, multiply the transmission ratio by the final drive ratio to determine total wheel RPM and vehicle speed."
+      "A gear ratio measures the mechanical relationship between two or more meshed gears in a gear train. It defines how input speed and torque transfer from a drive gear (connected to the motor) to a driven gear (connected to the output load).",
+      "<h2 className='text-2xl font-bold mt-6 mb-3 text-gray-900'>The Gear Ratio Formula</h2>",
+      "To calculate the gear ratio of a single pair of gears, divide the number of teeth on the driven gear by the number of teeth on the drive gear:",
+      "<div className='bg-slate-100 p-4 rounded-lg my-4 font-mono text-center font-semibold text-slate-800'>Gear Ratio = Output Teeth (Driven) ÷ Input Teeth (Drive)</div>",
+      "<strong>Worked Example:</strong> If a 60-tooth driven gear is powered by a 20-tooth drive gear, the calculation is 60 ÷ 20 = 3. This gives a <strong>3:1 gear ratio</strong>, meaning the drive gear turns 3 times for every single turn of the driven gear.",
+      "<h2 className='text-2xl font-bold mt-6 mb-3 text-gray-900'>Calculating Output RPM & Vehicle Speed</h2>",
+      "Gear ratios directly alter output speed (RPM) and torque. Reducing output speed multiplies output torque by the same factor.",
+      "<ul className='list-disc pl-6 space-y-2 my-4'><li><strong>Output RPM Formula:</strong> Output RPM = Input RPM ÷ Gear Ratio</li><li><strong>Example Calculation:</strong> A motor spinning at 3,000 RPM into a 5:1 reduction gearbox outputs 600 RPM (3,000 ÷ 5).</li><li><strong>Transmission Speed:</strong> To calculate road speed, multiply transmission gear ratio by final drive ratio to find total wheel RPM.</li></ul>",
+      "<h2 className='text-2xl font-bold mt-6 mb-3 text-gray-900'>Compound Gear Trains</h2>",
+      "In multi-stage gearboxes with multiple gear sets, multiply individual stage ratios together to get the total reduction:",
+      "<div className='bg-slate-100 p-4 rounded-lg my-4 font-mono text-center font-semibold text-slate-800'>Total Ratio = Stage 1 Ratio × Stage 2 Ratio × Stage 3 Ratio</div>",
+      "If Stage 1 is 4:1 and Stage 2 is 3:1, the total gearbox reduction is 12:1 (4 × 3). A motor spinning at 2,400 RPM through this gearbox results in an output speed of 200 RPM with 12 times the motor's torque."
     ]
   },
   {
