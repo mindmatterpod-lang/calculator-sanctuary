@@ -9,6 +9,18 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "how-to-calculate-gear-ratio",
+    title: "How to Calculate Gear Ratio (Teeth, Speed & RPM Explained)",
+    excerpt: "Learn how to calculate gear ratios, output RPM, torque, and transmission speed using straightforward formulas and worked examples.",
+    readTime: "5 min read",
+    related: "gear-ratio-calculator",
+    body: [
+      "A gear ratio measures the relationship between two or more meshed gears. To calculate the basic gear ratio, divide the number of teeth on the driven gear (output) by the number of teeth on the drive gear (input): Gear Ratio = Output Teeth ÷ Input Teeth. For example, a 60-tooth driven gear powered by a 20-tooth drive gear results in a 3:1 ratio, meaning the drive gear turns 3 times for every single rotation of the driven gear.",
+      "Gear ratios directly control output RPM and torque. Calculate output speed by dividing input RPM by the gear ratio: Output RPM = Input RPM ÷ Gear Ratio. If a motor spins at 3,000 RPM with a 5:1 reduction ratio, the output shaft rotates at 600 RPM. Torque scales inversely: a higher ratio multiplies output torque by reducing rotational speed, making it essential for transmission drives, machinery, and automotive differentials.",
+      "For compound gear trains with multiple stages, multiply the individual stage ratios together: Total Ratio = Ratio 1 × Ratio 2 × Ratio 3. In vehicle speed calculations, combine transmission gear ratio and final drive differential ratio with tire diameter to convert motor RPM into road speed (mph or km/h). Using our interactive gear ratio calculator, you can instantly test gear counts, motor speeds, and torque outputs for any mechanical system."
+    ]
+  },
+  {
     slug: "how-to-calculate-bmi",
     title: "How to Calculate BMI (and What It Actually Tells You)",
     excerpt: "The BMI formula, worked examples, and where the number falls short.",
