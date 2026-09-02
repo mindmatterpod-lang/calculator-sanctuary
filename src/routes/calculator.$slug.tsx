@@ -1,8 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { CalculatorRunner } from "@/components/calculator-runner";
 import { CalculatorCard } from "@/components/calculator-card";
-import { calculatorsByCategory, getCalculator, getCategory } from "@/lib/calculators";
+import { calculators, calculatorsByCategory, getCalculator, getCategory } from "@/lib/calculators";
 import { posts } from "@/lib/posts";
+import { getContent } from "@/lib/content";
 
 export const Route = createFileRoute("/calculator/$slug")({
   loader: ({ params }) => {
