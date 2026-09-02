@@ -339,7 +339,7 @@ const baseCalculators: Calculator[] = [
   /* ---------------------------- FINANCE ---------------------------- */
   loanCalc("emi-calculator", "EMI Calculator", "Work out the exact monthly instalment for any loan, plus total interest."),
   loanCalc("loan-calculator", "Loan Calculator", "Estimate repayments, total cost and interest for personal or auto loans."),
-  loanCalc("mortgage-calculator", "Mortgage Calculator", "Plan home-loan repayments across the full term of your mortgage."),
+  
   {
     slug: "interest-calculator",
     name: "Interest Calculator",
