@@ -105,4 +105,9 @@ const handWritten: Post[] = [
   },
 ];
 
+export const posts: Post[] = [
+  ...handWritten,
+  ...contentPosts.filter((p) => !handWritten.some((h) => h.slug === p.slug || h.related === p.related)),
+];
+
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);
