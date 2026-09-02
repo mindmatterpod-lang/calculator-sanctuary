@@ -1,3 +1,5 @@
+import { contentPosts } from "@/lib/content";
+
 export interface Post {
   slug: string;
   title: string;
@@ -5,9 +7,11 @@ export interface Post {
   readTime: string;
   related?: string;
   body: string[];
+  /** Slugs of related guides shown at the foot of the article. */
+  guides?: string[];
 }
 
-export const posts: Post[] = [
+const handWritten: Post[] = [
 {
     slug: "how-to-calculate-gear-ratio",
     title: "How to Calculate Gear Ratio: Formulas, RPM, and Gearbox Math",
@@ -99,6 +103,11 @@ export const posts: Post[] = [
       "Compare offers on total cost of credit, not the monthly figure lenders lead with.",
     ],
   },
+];
+
+export const posts: Post[] = [
+  ...handWritten,
+  ...contentPosts.filter((p) => !handWritten.some((h) => h.slug === p.slug || h.related === p.related)),
 ];
 
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);

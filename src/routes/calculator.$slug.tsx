@@ -1,8 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { CalculatorRunner } from "@/components/calculator-runner";
 import { CalculatorCard } from "@/components/calculator-card";
-import { calculatorsByCategory, getCalculator, getCategory } from "@/lib/calculators";
+import { calculators, calculatorsByCategory, getCalculator, getCategory } from "@/lib/calculators";
 import { posts } from "@/lib/posts";
+import { getContent } from "@/lib/content";
 
 export const Route = createFileRoute("/calculator/$slug")({
   loader: ({ params }) => {
@@ -47,9 +48,15 @@ function CalculatorPage() {
   if (!calc) throw notFound();
   const category = getCategory(calc.category);
 
-  const related = calculatorsByCategory(calc.category)
-    .filter((c) => c.slug !== calc.slug)
-    .slice(0, 3);
+  const content = getContent(calc.slug);
+  const faqs = content?.faqs?.length ? content.faqs : (calc.faqs ?? []);
+  const curated = content?.related
+    ?.map((s) => calculators.find((c) => c.slug === s))
+    .filter((c): c is NonNullable<typeof c> => Boolean(c) && c!.slug !== calc.slug);
+  const related = (curated?.length ? curated : calculatorsByCategory(calc.category).filter((c) => c.slug !== calc.slug)).slice(
+    0,
+    6,
+  );
   const article = posts.find((p) => p.related === calc.slug);
   const jsonLd = {
     "@context": "https://schema.org",
