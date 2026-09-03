@@ -114,9 +114,9 @@ describe("crawlability", () => {
     expect(res.status).toBe(200);
     const xml = await res.text();
     expect(res.headers.get("content-type")).toContain("xml");
+    const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(/^https?:\/\/[^/]+/, "") || "/");
     for (const p of routes) {
-      const loc = p === "/" ? "<loc>/</loc>" : `<loc>${p}</loc>`;
-      expect(xml, `sitemap missing ${p}`).toContain(loc);
+      expect(locs, `sitemap missing ${p}`).toContain(p);
     }
     const count = xml.match(/<url>/g)?.length ?? 0;
     expect(count).toBeGreaterThanOrEqual(calculators.length + categories.length + posts.length);
