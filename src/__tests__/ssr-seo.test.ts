@@ -96,7 +96,9 @@ describe("SEO metadata", () => {
   it("leaf routes self-reference canonical", async () => {
     const slug = calculators[0].slug;
     const h = head(await getHtml(`/calculator/${slug}`));
-    expect(tag(h, /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/)).toBe(`/calculator/${slug}`);
+    const canonical = tag(h, /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/);
+    // Canonical may be relative or absolute; it must point at this page.
+    expect(canonical?.replace(/^https?:\/\/[^/]+/, "")).toBe(`/calculator/${slug}`);
   });
 });
 
