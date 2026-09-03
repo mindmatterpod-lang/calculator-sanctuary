@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getCalculator } from "@/lib/calculators";
-import { getPost } from "@/lib/posts";
+import { getPost, posts } from "@/lib/posts";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
