@@ -96,7 +96,9 @@ describe("SEO metadata", () => {
   it("leaf routes self-reference canonical", async () => {
     const slug = calculators[0].slug;
     const h = head(await getHtml(`/calculator/${slug}`));
-    expect(tag(h, /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/)).toBe(`/calculator/${slug}`);
+    const canonical = tag(h, /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/);
+    // Canonical may be relative or absolute; it must point at this page.
+    expect(canonical?.replace(/^https?:\/\/[^/]+/, "")).toBe(`/calculator/${slug}`);
   });
 });
 
@@ -112,9 +114,9 @@ describe("crawlability", () => {
     expect(res.status).toBe(200);
     const xml = await res.text();
     expect(res.headers.get("content-type")).toContain("xml");
+    const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(/^https?:\/\/[^/]+/, "") || "/");
     for (const p of routes) {
-      const loc = p === "/" ? "<loc>/</loc>" : `<loc>${p}</loc>`;
-      expect(xml, `sitemap missing ${p}`).toContain(loc);
+      expect(locs, `sitemap missing ${p}`).toContain(p);
     }
     const count = xml.match(/<url>/g)?.length ?? 0;
     expect(count).toBeGreaterThanOrEqual(calculators.length + categories.length + posts.length);

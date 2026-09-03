@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getCalculator } from "@/lib/calculators";
-import { getPost } from "@/lib/posts";
+import { getPost, posts } from "@/lib/posts";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -32,6 +32,10 @@ export const Route = createFileRoute("/blog/$slug")({
 function BlogPost() {
   const { post } = Route.useLoaderData();
   const calc = post.related ? getCalculator(post.related) : undefined;
+  const guides = (post.guides ?? [])
+    .map((slug) => posts.find((p) => p.slug === slug))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p) && p!.slug !== post.slug)
+    .slice(0, 3);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -86,6 +90,20 @@ function BlogPost() {
           <h2 className="mt-1 font-display text-lg font-semibold">{calc.name}</h2>
           <p className="mt-2 text-sm text-muted-foreground">{calc.description}</p>
         </Link>
+      ) : null}
+
+      {guides.length ? (
+        <section className="mt-12">
+          <h2 className="font-display text-xl font-bold">Related guides</h2>
+          <div className="mt-4 space-y-3">
+            {guides.map((g) => (
+              <Link key={g.slug} to="/blog/$slug" params={{ slug: g.slug }} className="surface-card block p-4">
+                <h3 className="font-display text-base font-semibold">{g.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{g.excerpt}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
       ) : null}
     </article>
   );
