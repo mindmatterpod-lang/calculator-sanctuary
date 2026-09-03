@@ -87,6 +87,20 @@ function BlogPost() {
           <p className="mt-2 text-sm text-muted-foreground">{calc.description}</p>
         </Link>
       ) : null}
+
+      {guides.length ? (
+        <section className="mt-12">
+          <h2 className="font-display text-xl font-bold">Related guides</h2>
+          <div className="mt-4 space-y-3">
+            {guides.map((g) => (
+              <Link key={g.slug} to="/blog/$slug" params={{ slug: g.slug }} className="surface-card block p-4">
+                <h3 className="font-display text-base font-semibold">{g.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{g.excerpt}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </article>
   );
 }
