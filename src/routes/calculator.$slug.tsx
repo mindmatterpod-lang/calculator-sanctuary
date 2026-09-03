@@ -127,18 +127,52 @@ function CalculatorPage() {
 
       <header className="mt-5 max-w-3xl">
         <h1 className="font-display text-3xl font-bold sm:text-4xl">{calc.name}</h1>
-        <p className="mt-3 text-base leading-relaxed text-muted-foreground">{calc.description}</p>
+        <p className="mt-3 text-base leading-relaxed text-muted-foreground">{content?.intro ?? calc.description}</p>
       </header>
 
       <div className="mt-8">
         <CalculatorRunner calc={calc} />
       </div>
 
-      {calc.faqs?.length ? (
+      {content ? (
+        <>
+          <section className="mt-14 max-w-3xl">
+            <h2 className="font-display text-2xl font-bold">How the {calc.name.toLowerCase()} works</h2>
+            <div className="mt-4 space-y-4 text-base leading-relaxed text-muted-foreground">
+              {content.method.map((para) => (
+                <p key={para}>{para}</p>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-12 max-w-3xl">
+            <h2 className="font-display text-2xl font-bold">{content.example.title}</h2>
+            <ol className="surface-card mt-4 space-y-3 p-5 text-sm leading-relaxed text-muted-foreground">
+              {content.example.lines.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ol>
+          </section>
+
+          <section className="mt-12 max-w-3xl">
+            <h2 className="font-display text-2xl font-bold">Common mistakes to avoid</h2>
+            <div className="mt-4 space-y-3">
+              {content.mistakes.map((m) => (
+                <div key={m.title} className="surface-card p-5">
+                  <h3 className="font-display text-base font-semibold">{m.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </>
+      ) : null}
+
+      {faqs.length ? (
         <section className="mt-14">
           <h2 className="font-display text-2xl font-bold">Frequently asked questions</h2>
           <div className="mt-5 space-y-3">
-            {calc.faqs.map((faq: { q: string; a: string }) => (
+            {faqs.map((faq: { q: string; a: string }) => (
               <div key={faq.q} className="surface-card p-5">
                 <h3 className="font-display text-base font-semibold">{faq.q}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{faq.a}</p>
