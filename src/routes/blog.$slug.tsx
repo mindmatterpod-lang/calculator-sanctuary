@@ -32,6 +32,10 @@ export const Route = createFileRoute("/blog/$slug")({
 function BlogPost() {
   const { post } = Route.useLoaderData();
   const calc = post.related ? getCalculator(post.related) : undefined;
+  const guides = (post.guides ?? [])
+    .map((slug) => posts.find((p) => p.slug === slug))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p) && p!.slug !== post.slug)
+    .slice(0, 3);
 
   const jsonLd = {
     "@context": "https://schema.org",
