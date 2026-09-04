@@ -1,5 +1,11 @@
 import { calculators } from "@/lib/calculators";
 import { calcContent } from "@/lib/content";
-const fin = calculators.filter(c=>c.category==="finance");
-console.log(fin.length);
-console.log(fin.filter(c=>!calcContent[c.slug]).map(c=>c.slug+" | "+c.title).join("\n"));
+import { posts } from "@/lib/posts";
+const slugs=new Set(calculators.map(c=>c.slug));
+const fin=calculators.filter(c=>c.category==="finance");
+console.log("content keys",Object.keys(calcContent).length);
+console.log("finance missing",fin.filter(c=>!calcContent[c.slug]).map(c=>c.slug));
+console.log("bad keys",Object.keys(calcContent).filter(k=>!slugs.has(k)));
+console.log("bad related",Object.entries(calcContent).flatMap(([k,v])=>(v.related??[]).filter(r=>!slugs.has(r)).map(r=>k+"->"+r)));
+const ps=posts.map(p=>p.slug); console.log("posts",ps.length,"dupes",ps.filter((s,i)=>ps.indexOf(s)!==i));
+console.log("bad guides",posts.flatMap(p=>(p.guides??[]).filter(g=>!ps.includes(g)).map(g=>p.slug+"->"+g)));
