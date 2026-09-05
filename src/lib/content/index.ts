@@ -3,12 +3,14 @@ import type { CalcContent, ContentMap } from "./types";
 import { financeContent } from "./finance";
 import { finance2Content } from "./finance-2";
 import { finance3Content } from "./finance-3";
+import { healthContent } from "./health";
 
 /** Registry of long-form content, keyed by calculator slug. Batches are added per category. */
 export const calcContent: ContentMap = {
   ...financeContent,
   ...finance2Content,
   ...finance3Content,
+  ...healthContent,
 };
 
 export const getContent = (slug: string): CalcContent | undefined => calcContent[slug];

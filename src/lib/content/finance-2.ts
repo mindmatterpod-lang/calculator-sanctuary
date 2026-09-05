@@ -61,35 +61,34 @@ export const finance2Content: ContentMap = {
 
   "interest-calculator": {
     intro:
-      "This is the general-purpose interest tool: give it a principal, a rate, a period and a compounding frequency, and it tells you what the money becomes. Use it when you are comparing offers whose terms do not line up — a bank quoting monthly compounding against a bond quoting annual, or a deposit quoted for 30 months against one quoted for three years.",
+      "This is the fastest route to a single interest figure: principal, rate, time, done. It uses the flat simple-interest formula rather than compounding, which makes it the right tool the moment someone quotes you a rate 'per year, flat' — a bridging loan, a family loan, or a bond coupon — and you just need the number without building an amortisation table.",
     method: [
-      "Compound growth uses A = P × (1 + r/n)^(n×t), where n is the number of compounding periods per year. Interest earned is A − P.",
-      "Raising n increases the result, but with diminishing returns. Monthly compounding is meaningfully better than annual; daily compounding is barely better than monthly.",
-      "To compare offers fairly, convert each to an effective annual rate: EAR = (1 + r/n)^n − 1. That single number is the only honest basis for comparison.",
+      "Simple interest: SI = P × R × T ÷ 100, where P is the principal, R is the annual rate as a whole number (7, not 0.07), and T is the time in years. Maturity amount = P + SI.",
+      "The base never changes here — interest is earned only on the original principal, never on interest already accrued. That is what makes the formula linear: double the time and the interest exactly doubles.",
+      "This is deliberately the simple-rate tool. For a deposit or loan that compounds — most savings accounts, most mortgages — use the Compound Interest Calculator instead, since simple interest will understate the real return or cost.",
     ],
     example: {
-      title: "Worked example: 100,000 at 7% for 5 years, four frequencies",
+      title: "Worked example: 100,000 at 7% for 5 years",
       lines: [
-        "Annual (n=1): 100,000 × 1.07^5 = 140,255.",
-        "Quarterly (n=4): 100,000 × (1 + 0.0175)^20 = 141,478.",
-        "Monthly (n=12): 100,000 × (1 + 0.005833)^60 = 141,763.",
-        "Daily (n=365): 141,902.",
-        "Annual to monthly gains 1,508. Monthly to daily gains only 139 — the curve flattens fast.",
+        "SI = 100,000 × 7 × 5 ÷ 100 = 35,000.",
+        "Maturity amount = 100,000 + 35,000 = 135,000.",
+        "Interest is flat at 7,000 per year for every one of the 5 years — year 1 and year 5 add exactly the same amount.",
+        "The same 100,000 at 7% compounded annually would instead grow to roughly 140,255 over 5 years — 5,255 more, purely from interest earning interest.",
       ],
     },
     mistakes: [
-      { title: "Comparing nominal rates across different frequencies", body: "A 7.1% annual-compounding deposit beats a 7.0% monthly one only if you check the effective rates: 7.10% versus 7.23%. The lower nominal rate wins here." },
-      { title: "Forgetting tax on interest", body: "Interest income is usually taxable at your marginal rate. A 7% gross return at 30% tax is 4.9% net, which may be below inflation." },
-      { title: "Mixing rate period and time period", body: "If the rate is monthly, t must be in months and n is 1. Half of all wrong answers come from a monthly rate paired with a yearly term." },
+      { title: "Using this for a compounding product", body: "Simple interest is the exception, not the rule, for real savings and loan products. If your statement shows interest added periodically and then itself earning interest, use the Compound Interest Calculator instead." },
+      { title: "Entering the rate as a decimal", body: "This tool takes the rate as a plain percentage number, e.g. 7 for 7%. Entering 0.07 divides the result by 100 again and understates the interest hugely." },
+      { title: "Feeding in months instead of years", body: "T is in years. For 9 months, enter 0.75, not 9 — entering whole months inflates the result by roughly twelvefold." },
     ],
     faqs: [
-      { q: "What is an effective annual rate?", a: "The rate that would produce the same yearly growth with a single annual compounding. It normalises offers so different compounding frequencies can be compared." },
-      { q: "Does daily compounding make a real difference?", a: "Very little. Moving from monthly to daily typically adds under 0.02 percentage points of effective yield. Frequency matters most between annual and monthly." },
-      { q: "How do I find the rate needed to reach a target?", a: "r = (A/P)^(1/t) − 1 for annual compounding. To turn 100,000 into 200,000 in eight years you need 9.05% a year." },
-      { q: "Should I use this or the compound interest calculator?", a: "Use this one for single-deposit growth and frequency comparisons; use the compound interest tool when you are adding regular contributions." },
-      { q: "Why does my bank's figure differ slightly?", a: "Banks often use day-count conventions such as 365/360 or accrue on cleared balances, which shifts the result by a few units on large sums." },
+      { q: "When is interest actually simple rather than compound?", a: "Flat-rate vehicle and consumer loans, most bond coupon payments, short bridging finance, and statutory interest on late payments or court awards are the common real-world cases." },
+      { q: "How is this different from the Simple Interest Calculator?", a: "They use the same formula. This page is the fast single-purpose version; the Simple Interest Calculator goes deeper into flat-rate-versus-reducing-balance comparisons and part-year timing." },
+      { q: "Why is my bank quoting a much higher effective cost than this number?", a: "Flat-rate loans are often marketed on the simple-interest figure while the true reducing-balance cost is considerably higher. A 'flat 8%' car loan is roughly equivalent to 14–15% reducing balance." },
+      { q: "Can I work backwards to find the rate from a known interest amount?", a: "Yes: R = (Interest × 100) ÷ (P × T). If 20,000 earned 3,000 over two years, the rate is (3,000 × 100) ÷ (20,000 × 2) = 7.5%." },
+      { q: "Does this calculator handle compounding frequency?", a: "No — that is intentionally the Compound Interest Calculator's job, where you can choose annual, quarterly, monthly or daily compounding and see how the result changes." },
     ],
-    related: ["compound-interest", "simple-interest-calculator", "apy-calculator", "fd-calculator", "savings-calculator"],
+    related: ["simple-interest-calculator", "compound-interest", "loan-calculator", "fd-calculator", "savings-calculator"],
   },
 
   "apy-calculator": {
