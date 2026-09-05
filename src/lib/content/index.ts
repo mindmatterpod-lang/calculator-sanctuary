@@ -6,6 +6,7 @@ import { finance3Content } from "./finance-3";
 import { healthContent } from "./health";
 import { mathematicsContent } from "./mathematics";
 import { engineeringContent } from "./engineering";
+import { physicsContent } from "./physics";
 
 /** Registry of long-form content, keyed by calculator slug. Batches are added per category. */
 export const calcContent: ContentMap = {
@@ -15,6 +16,7 @@ export const calcContent: ContentMap = {
   ...healthContent,
   ...mathematicsContent,
   ...engineeringContent,
+  ...physicsContent,
 };
 
 export const getContent = (slug: string): CalcContent | undefined => calcContent[slug];
