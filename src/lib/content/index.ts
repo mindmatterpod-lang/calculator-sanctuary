@@ -12,8 +12,9 @@ import { programmingContent } from "./programming";
 import { timeDateContent } from "./time-date";
 import { educationContent } from "./education";
 import { unitConvertersContent } from "./unit-converters";
+import { chemistryContent } from "./chemistry";
 
-/** Registry of long-form content, keyed by calculator slug. Batches are added per category. */
+/** Registry of long-form content, keyed by calculator slug. Full site coverage as of this batch. */
 export const calcContent: ContentMap = {
   ...financeContent,
   ...finance2Content,
@@ -27,6 +28,7 @@ export const calcContent: ContentMap = {
   ...timeDateContent,
   ...educationContent,
   ...unitConvertersContent,
+  ...chemistryContent,
 };
 
 export const getContent = (slug: string): CalcContent | undefined => calcContent[slug];
