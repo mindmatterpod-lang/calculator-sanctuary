@@ -10,6 +10,7 @@ import { physicsContent } from "./physics";
 import { everydayLifeContent } from "./everyday-life";
 import { programmingContent } from "./programming";
 import { timeDateContent } from "./time-date";
+import { educationContent } from "./education";
 
 /** Registry of long-form content, keyed by calculator slug. Batches are added per category. */
 export const calcContent: ContentMap = {
@@ -23,6 +24,7 @@ export const calcContent: ContentMap = {
   ...everydayLifeContent,
   ...programmingContent,
   ...timeDateContent,
+  ...educationContent,
 };
 
 export const getContent = (slug: string): CalcContent | undefined => calcContent[slug];
