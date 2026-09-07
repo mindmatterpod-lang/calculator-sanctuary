@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { Calculator } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 
 const nav = [
@@ -14,9 +13,13 @@ export function SiteHeader() {
       <div className="glass-panel border-b border-border/60">
         <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 sm:flex sm:justify-between sm:px-6">
           <Link to="/" className="flex min-w-0 items-center gap-2.5">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
-              <Calculator className="h-[18px] w-[18px]" />
-            </span>
+            <img
+              src="/logo.svg"
+              alt="CalculatorHub"
+              className="h-9 w-9 shrink-0 rounded-xl"
+              width={36}
+              height={36}
+            />
             <span className="truncate font-display text-lg font-semibold tracking-tight">
               Calculator<span className="text-gradient">Hub</span>
             </span>

@@ -112,8 +112,16 @@ export const Route =
           content: "website",
         },
         {
+          property: "og:image",
+          content: "https://calculator-sanctuary.vercel.app/logo-512.png",
+        },
+        {
           name: "twitter:card",
           content: "summary_large_image",
+        },
+        {
+          name: "twitter:image",
+          content: "https://calculator-sanctuary.vercel.app/logo-512.png",
         },
 
         // Google Search Console verification
@@ -133,6 +141,15 @@ export const Route =
           rel: "icon",
           href: "/favicon.ico",
           type: "image/x-icon",
+        },
+        {
+          rel: "icon",
+          href: "/logo.svg",
+          type: "image/svg+xml",
+        },
+        {
+          rel: "apple-touch-icon",
+          href: "/apple-touch-icon.png",
         },
         {
           rel: "preconnect",

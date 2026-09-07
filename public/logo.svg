@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="256" height="256" rx="58" fill="url(#bg)"/>
+
+  <!-- equals sign, clearly legible, both bars same length -->
+  <rect x="56" y="98" width="112" height="24" rx="12" fill="#FFFFFF"/>
+  <rect x="56" y="146" width="112" height="24" rx="12" fill="#FFFFFF"/>
+
+  <!-- the "hub" node: the answer/result, sitting where the equals sign resolves to -->
+  <circle cx="196" cy="134" r="20" fill="#FDE68A"/>
+</svg>
