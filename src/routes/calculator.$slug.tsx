@@ -4,6 +4,7 @@ import { CalculatorCard } from "@/components/calculator-card";
 import { calculators, calculatorsByCategory, getCalculator, getCategory } from "@/lib/calculators";
 import { posts } from "@/lib/posts";
 import { getContent } from "@/lib/content";
+import { SITE_URL } from "@/lib/utils";
 
 export const Route = createFileRoute("/calculator/$slug")({
   loader: ({ params }) => {
@@ -25,17 +26,13 @@ export const Route = createFileRoute("/calculator/$slug")({
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
-        { property: "og:url", content: `/calculator/${calc.slug}` },
+        { property: "og:url", content: `${SITE_URL}/calculator/${calc.slug}` },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
       ],
-      // Old line 33:
-// links: [{ rel: 'canonical', href: `/calculator/${calc.slug}` }],
-
-// Fixed line 33:
-links: [{ rel: 'canonical', href: `https://calculator-sanctuary.vercel.app/calculator/${calc.slug}` }],
+      links: [{ rel: "canonical", href: `${SITE_URL}/calculator/${calc.slug}` }],
     };
   },
 
@@ -71,26 +68,11 @@ function CalculatorPage() {
       },
       {
         "@type": "BreadcrumbList",
-        "itemListElement": [
-  { 
-    "@type": "ListItem", 
-    position: 1, 
-    name: "Home", 
-    item: "https://calculator-sanctuary.vercel.app/" 
-  },
-  { 
-    "@type": "ListItem", 
-    position: 2, 
-    name: "Calculators", 
-    item: "https://calculator-sanctuary.vercel.app/calculators" 
-  },
-  { 
-    "@type": "ListItem", 
-    position: 3, 
-    name: calc.name, 
-    item: `https://calculator-sanctuary.vercel.app/calculator/${calc.slug}` 
-  }
-],
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "Calculators", item: `${SITE_URL}/calculators` },
+          { "@type": "ListItem", position: 3, name: calc.name, item: `${SITE_URL}/calculator/${calc.slug}` },
+        ],
       },
       ...(faqs.length
         ? [

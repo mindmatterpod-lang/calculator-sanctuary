@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { CalculatorCard } from "@/components/calculator-card";
 import { calculators, categories, searchCalculators } from "@/lib/calculators";
+import { SITE_URL } from "@/lib/utils";
 
 const title = "All Calculators — CalculatorHub";
 const description =
@@ -16,10 +17,10 @@ export const Route = createFileRoute("/calculators")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/calculators" },
+      { property: "og:url", content: `${SITE_URL}/calculators` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/calculators" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/calculators` }],
   }),
   component: AllCalculators,
 });

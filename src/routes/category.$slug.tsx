@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { CalculatorCard } from "@/components/calculator-card";
 import { calculatorsByCategory, getCategory } from "@/lib/calculators";
+import { SITE_URL } from "@/lib/utils";
 
 export const Route = createFileRoute("/category/$slug")({
   loader: ({ params }) => {
@@ -24,7 +25,7 @@ export const Route = createFileRoute("/category/$slug")({
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
-      links: [{ rel: "canonical", href: `/category/${category.slug}` }],
+      links: [{ rel: "canonical", href: `${SITE_URL}/category/${category.slug}` }],
     };
   },
   component: CategoryPage,
@@ -38,9 +39,9 @@ function CategoryPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-      { "@type": "ListItem", position: 2, name: "Categories", item: "/categories" },
-      { "@type": "ListItem", position: 3, name: category.name, item: `/category/${category.slug}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Categories", item: `${SITE_URL}/categories` },
+      { "@type": "ListItem", position: 3, name: category.name, item: `${SITE_URL}/category/${category.slug}` },
     ],
   };
 

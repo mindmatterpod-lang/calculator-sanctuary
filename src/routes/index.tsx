@@ -10,6 +10,7 @@ import {
   popularCalculators,
   searchCalculators,
 } from "@/lib/calculators";
+import { SITE_URL } from "@/lib/utils";
 
 const title = "CalculatorHub — Every Calculator You'll Ever Need";
 const description =
@@ -54,11 +55,11 @@ export const Route = createFileRoute("/")({
 
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
   }),
   component: Home,
 });

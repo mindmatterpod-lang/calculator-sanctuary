@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { calculatorsByCategory, categories } from "@/lib/calculators";
+import { SITE_URL } from "@/lib/utils";
 
 const title = "Calculator Categories — CalculatorHub";
 const description =
@@ -13,10 +14,10 @@ export const Route = createFileRoute("/categories")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/categories" },
+      { property: "og:url", content: `${SITE_URL}/categories` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/categories" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/categories` }],
   }),
   component: CategoriesPage,
 });
