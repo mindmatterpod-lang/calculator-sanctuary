@@ -739,6 +739,17 @@ export const healthContent: ContentMap = {
       { q: "Does cycle length change the accuracy?", a: "Yes. Irregular cycles make calendar estimates unreliable; tracking with tests or temperature over a few months is much better." },
     ],
     related: ["pregnancy-due-date-calculator", "child-height-predictor", "bmi-calculator", "healthy-weight-calculator", "water-intake-calculator"],
+    post: {
+      title: "Why 'Day 14' Is Wrong for Most Cycles",
+      excerpt: "The day-14 rule only works for a textbook 28-day cycle. Here's the part of the cycle that's actually predictable, and why it isn't the part everyone counts from.",
+      readTime: "4 min",
+      body: [
+        "Almost everyone has heard 'ovulation happens on day 14.' It's a reasonable shorthand for a 28-day cycle, and a genuinely misleading one for anyone whose cycle is shorter, longer, or simply irregular — which is most people, most of the time.",
+        "The reason day 14 doesn't generalise is that the two halves of a cycle behave very differently. The follicular phase — from the first day of a period until ovulation — varies a lot from person to person and cycle to cycle. The luteal phase — from ovulation until the next period — is remarkably consistent, typically landing somewhere in a 12-16 day range regardless of how long the rest of the cycle runs.",
+        "That's the actual insight behind estimating ovulation from cycle length: instead of counting forward a fixed 14 days from the last period (which assumes the variable phase is fixed), it's more reliable to count backward roughly 14 days from the next expected period, using the far more stable luteal phase as the anchor. A 32-day cycle doesn't push ovulation to day 14 plus a few days of guesswork — it reliably shifts ovulation to somewhere around day 18, because the extra length almost always shows up in the follicular phase, not the luteal one.",
+        "This matters beyond trivia: the fertile window itself is short — egg viability is measured in hours, though sperm can survive several days, which is why the realistic conception window spans about six days ending around ovulation, not a single day. Anchoring that window to a fixed day 14 for every cycle length is exactly the kind of small, confident-sounding error that quietly misses the actual window for anyone not on a textbook 28-day cycle.",
+      ],
+    },
   },
 
   "child-height-predictor": {
