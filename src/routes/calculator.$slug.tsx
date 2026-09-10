@@ -4,7 +4,7 @@ import { CalculatorCard } from "@/components/calculator-card";
 import { calculators, calculatorsByCategory, getCalculator, getCategory } from "@/lib/calculators";
 import { posts } from "@/lib/posts";
 import { getContent } from "@/lib/content";
-import { SITE_URL } from "@/lib/utils";
+import { SITE_URL, metaDescriptionFrom } from "@/lib/utils";
 
 export const Route = createFileRoute("/calculator/$slug")({
   loader: ({ params }) => {
@@ -19,7 +19,9 @@ export const Route = createFileRoute("/calculator/$slug")({
       return { meta: [{ title: "Calculator not found — CalculatorHub" }, { name: "robots", content: "noindex" }] };
     }
     const title = `${calc.name} — Free Online Calculator | CalculatorHub`;
-    const description = `${calc.description} Instant results, formula breakdown and step-by-step working.`;
+    const genericFallback = `${calc.description} Instant results, formula breakdown and step-by-step working.`;
+    const content = getContent(calc.slug);
+    const description = metaDescriptionFrom(content?.intro, genericFallback);
     return {
       meta: [
         { title },
