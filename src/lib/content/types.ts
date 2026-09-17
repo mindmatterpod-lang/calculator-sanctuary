@@ -22,6 +22,10 @@ export interface CalcContent {
     /** Slugs of related blog posts for the "Related guides" block. */
     guides?: string[];
   };
+  /** ISO date (YYYY-MM-DD) this content was last fact-checked. Shown as a trust signal on the page. */
+  reviewedDate?: string;
+  /** External authorities backing the method/claims (e.g. ACOG, WHO, IRS). Shown on the page and helps with YMYL trust signals. */
+  sources?: { label: string; url: string }[];
 }
 
 export type ContentMap = Record<string, CalcContent>;

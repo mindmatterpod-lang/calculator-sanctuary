@@ -5,6 +5,7 @@ const nav = [
   { to: "/calculators", label: "All calculators" },
   { to: "/categories", label: "Categories" },
   { to: "/blog", label: "Blog" },
+  { to: "/about", label: "About" },
 ];
 
 export function SiteHeader() {
@@ -60,6 +61,9 @@ export function SiteFooter() {
           </Link>
           <Link to="/blog" className="hover:text-foreground">
             Blog
+          </Link>
+          <Link to="/about" className="hover:text-foreground">
+            About
           </Link>
         </nav>
       </div>

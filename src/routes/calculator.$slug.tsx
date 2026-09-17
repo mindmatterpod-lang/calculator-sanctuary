@@ -67,6 +67,9 @@ function CalculatorPage() {
         operatingSystem: "Any",
         description: calc.description,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        author: { "@type": "Organization", name: "CalculatorHub", url: SITE_URL },
+        publisher: { "@type": "Organization", name: "CalculatorHub", url: SITE_URL },
+        ...(content?.reviewedDate ? { dateModified: content.reviewedDate } : {}),
       },
       {
         "@type": "BreadcrumbList",
@@ -112,6 +115,20 @@ function CalculatorPage() {
       <header className="mt-5 max-w-3xl">
         <h1 className="font-display text-3xl font-bold sm:text-4xl">{calc.name}</h1>
         <p className="mt-3 text-base leading-relaxed text-muted-foreground">{content?.intro ?? calc.description}</p>
+        {content?.reviewedDate ? (
+          <p className="mt-3 text-xs text-muted-foreground">
+            Fact-checked by the{" "}
+            <Link to="/about" className="underline hover:text-foreground">
+              CalculatorHub editorial team
+            </Link>{" "}
+            on{" "}
+            {new Date(content.reviewedDate).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+        ) : null}
       </header>
 
       <div className="mt-8">
@@ -163,6 +180,21 @@ function CalculatorPage() {
               </div>
             ))}
           </div>
+        </section>
+      ) : null}
+
+      {content?.sources?.length ? (
+        <section className="mt-14 max-w-3xl">
+          <h2 className="font-display text-2xl font-bold">Sources</h2>
+          <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+            {content.sources.map((s) => (
+              <li key={s.url}>
+                <a href={s.url} target="_blank" rel="noopener noreferrer nofollow" className="underline hover:text-foreground">
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
 

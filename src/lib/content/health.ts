@@ -739,6 +739,11 @@ export const healthContent: ContentMap = {
       { q: "Does cycle length change the accuracy?", a: "Yes. Irregular cycles make calendar estimates unreliable; tracking with tests or temperature over a few months is much better." },
     ],
     related: ["pregnancy-due-date-calculator", "child-height-predictor", "bmi-calculator", "healthy-weight-calculator", "water-intake-calculator"],
+    reviewedDate: "2026-09-18",
+    sources: [
+      { label: "ACOG — Ovulation and Fertility Awareness", url: "https://www.acog.org/womens-health/faqs/fertility-awareness-based-methods-of-family-planning" },
+      { label: "NIH/NICHD — Menstrual Cycle Basics", url: "https://www.nichd.nih.gov/health/topics/menstruation/conditioninfo/cycle" },
+    ],
     post: {
       title: "Why 'Day 14' Is Wrong for Most Cycles",
       excerpt: "The day-14 rule only works for a textbook 28-day cycle. Here's the part of the cycle that's actually predictable, and why it isn't the part everyone counts from.",
